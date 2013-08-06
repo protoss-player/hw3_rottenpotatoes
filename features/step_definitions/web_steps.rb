@@ -252,3 +252,19 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then /^Table should contain (.+)$/ do |text|
+  if page.respond_to? :should
+    page.should have_selector('td', :text => /^#{text}$/)
+  else
+    assert page.has_selector?('td', :text => /^#{text}$/)
+  end
+end
+
+Then /^Table should not contain (.+)$/ do |text|
+  if page.respond_to? :should
+    page.should have_no_selector('td', :text => /^#{text}$/)
+  else
+    assert page.has_no_selector?('td', :text => /^#{text}$/)
+  end
+end

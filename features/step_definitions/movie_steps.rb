@@ -33,11 +33,15 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
 end
 
 Then /^I should see all of the movies$/ do
-
    all("table#movies tbody tr").count.should == Movie.count  
-
 end
 
 Then /^I should see no movies$/ do
    all("table#movies tbody tr").count.should == 0
+end
+
+Then /I should (not\s+)?see movies rated (.*)/ do |condition, rating_list|
+  rating_list.split(/\s*,\s*/).each do |rating|
+     step %Q{Table should #{condition}contain #{rating}}
+  end
 end

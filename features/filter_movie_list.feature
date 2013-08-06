@@ -24,9 +24,10 @@ Background: movies have been added to database
 Scenario: restrict to movies with 'PG' or 'R' ratings
   Given I am on the movies page
   And I check the following ratings: PG, R
+  And I uncheck the following ratings: PG-13, G
   And I press "Refresh"
-  Then I should see "PG"
-  #And the "Rating" field within movies should not contain "PG-13" 
+  Then I should see movies rated PG, R
+  And I should not see movies rated PG-13, G
   
   # enter step(s) to check the 'PG' and 'R' checkboxes
   # enter step(s) to uncheck all other checkboxes
